@@ -11,7 +11,7 @@
 	<NuxtLayout :name="layout">
 		<div>
 			<h1>
-				Test
+				Test 2
 			</h1>
 			<ul>
 				<li v-for="card in cards" :key="card.id">
