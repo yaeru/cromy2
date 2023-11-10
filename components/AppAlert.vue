@@ -1,5 +1,11 @@
+<script setup>
+  defineProps({
+    state: String
+  })
+</script>
+
 <template>
-  <span class="uk-alert uk-alert-warning">
+  <div :class="'uk-text-center uk-alert uk-alert-' + state">
     <slot />
-  </span>
+  </div>
 </template>

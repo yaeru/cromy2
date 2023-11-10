@@ -16,16 +16,40 @@
 		if (error) {
 			alert(error.message)
 		} else {
-			return true
+			showMessage.value = true;
+			card.title = '';
+			card.description = '';
 		}
-	}
+	};
+
+	const showMessage = ref(false)
 </script>
 
 <template>
 	<h1>
 		Cartas
 	</h1>
-	<ul v-if="cards.length" class="uk-grid uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-grid-match" uk-grid>
+
+	<div class=" uk-margin-large-bottom">
+		<h3>Envia tus Cartas</h3>
+		<form @submit.prevent="addCard"  class="uk-grid uk-grid-small uk-child-width-1-3@m" uk-grid>
+			<div>
+				<input type="text" name="title" placeholder="Title" v-model="card.title" class="uk-input" required />
+			</div>
+			<div>
+				<input type="text" name="description" placeholder="Description" v-model="card.description" class="uk-input" />
+			</div>
+			<div>
+				<button type="submit" class="uk-button uk-button-primary">Enviar</button>
+			</div>
+		</form>
+
+		<AppAlert state="success" v-if="showMessage">¡Funcionó!</AppAlert>
+	</div>
+
+	<h3>Listado de Cartas</h3>
+
+	<ul v-if="cards.length" class="uk-grid uk-grid-small uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-grid-match" uk-grid>
 		<li v-for="card in cards">
 			<CardItem :card="card" :key="card.id" />
 		</li>
@@ -33,17 +57,4 @@
 	<p v-else>
 		Loading...
 	</p>
-
-	<div class="uk-card uk-card-body uk-card-primary uk-margin-top">
-		<h3>Envia tus Cartas</h3>
-		<form @submit.prevent="addCard" uk-margin>
-			<input type="text" name="title" placeholder="Title" v-model="card.title" class="uk-input" />
-			<input type="text" name="description" placeholder="Description" v-model="card.description" class="uk-input" />
-			<button type="submit" class="uk-button uk-button-primary">Enviar</button>
-		</form>
-	</div>
-
-	<!-- <pre>
-		{{ cards }}
-	</pre> -->
 </template>
