@@ -48,8 +48,7 @@
 	</div>
 
 	<h3>Listado de Cartas</h3>
-
-	<ul v-if="cards.length" class="uk-grid uk-grid-small uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-grid-match" uk-grid>
+	<ul v-if="cards.length" class="uk-grid uk-grid-small uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-grid-match" uk-sortable="handle: .uk-sortable-handle" uk-grid>
 		<li v-for="card in cards">
 			<CardItem :card="card" :key="card.id" />
 		</li>
