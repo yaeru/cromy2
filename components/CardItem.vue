@@ -1,0 +1,27 @@
+<script setup>
+	const props = defineProps({
+		card: {
+			type: Object,
+			required: true,
+		},
+	});
+	const { card } = props;
+</script>
+
+<template>
+	<div class="uk-card uk-card-default uk-card-small">
+		<div class="uk-card-header">
+			<h3 class="uk-card-title uk-margin-remove-bottom">
+				{{ card.title }}
+			</h3>
+			<p class="uk-text-meta uk-margin-remove-top">
+				{{ card.created_at }}
+			</p>
+		</div>
+		<div class="uk-card-body">
+			<p>
+				{{ card.description }}
+			</p>
+		</div>
+	</div>
+</template>

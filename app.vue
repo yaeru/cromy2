@@ -5,6 +5,8 @@
 <template>
 	<Navbar />
 	<div class="uk-container">
-		<NuxtPage />
+		<section class="uk-section uk-section-small">
+			<NuxtPage />
+		</section>
 	</div>
 </template>
