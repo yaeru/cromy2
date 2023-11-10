@@ -10,8 +10,8 @@
 		password: '',
 	});
 
-	const login = async () => {
-		const { error } = await supaAuth.signInWithPassword(credentials);
+	const register = async () => {
+		const { error } = await supaAuth.signUp(credentials);
 		if (error) {
 			alert(error.message);
 		} else {
@@ -21,8 +21,8 @@
 </script>
 <template>
 	<div>
-		<h1>Login</h1>
-		<form @submit.prevent="login" class="uk-card uk-card-body uk-card-default uk-width-large">
+		<h1>Register</h1>
+		<form @submit.prevent="register" class="uk-card uk-card-body uk-card-default uk-width-large">
 			<div class="uk-margin-bottom">
 				<input v-model="credentials.email" type="email" class="uk-input" placeholder="email" />
 			</div>
@@ -30,8 +30,9 @@
 				<input v-model="credentials.password" type="password" class="uk-input" placeholder="password" />
 			</div>
 			<button class="uk-button uk-button-primary">
-				Login
+				Register
 			</button>
 		</form>
+
 	</div>
 </template>
