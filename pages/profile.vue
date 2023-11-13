@@ -7,7 +7,7 @@
 	
 	const { data: usercard } = await useAsyncData(async () => {
 		const { data: { user } } = await supabase.auth.getUser()
-		const { data } = await supabase.from('userCard').select('*, cards(id, title)').eq('user_id', user.id)
+		const { data } = await supabase.from('view_my_cards').select('*').eq('user_id', user.id)
 		return data
 	});
 </script>
@@ -28,12 +28,12 @@
 		<h3>My cards</h3>
 		<ul>
 			<li v-for="card in usercard" :key="card.id">
-				{{ card.cards.title }}
+				{{ card.title }} <span class="uk-badge" v-if="card.count > 1">{{ card.count }}</span>
 			</li>
 		</ul>
 	</div>
 
-	<pre>
+	<!-- <pre>
 		{{ usercard }}
-	</pre>
+	</pre> -->
 </template>

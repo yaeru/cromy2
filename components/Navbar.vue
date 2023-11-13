@@ -40,15 +40,15 @@
 								<NuxtLink to="/login">Login</NuxtLink>
 							</li>
 							<li>
-								<NuxtLink to="/register">Registro</NuxtLink>
+								<NuxtLink to="/register">Register</NuxtLink>
 							</li>
 						</template>
 						<template v-else>
 							<li>
-								<NuxtLink to="/profile">Profile</NuxtLink>
+								<NuxtLink to="/profile">My Account</NuxtLink>
 							</li>
 							<li>
-								<a href="" @click="logout">Salir</a>
+								<a href="" @click="logout">Logout</a>
 							</li>
 						</template>
 					</ul>
