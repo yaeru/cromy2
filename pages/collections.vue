@@ -5,13 +5,6 @@
 		const { data } = await supabase.from('collection').select('*, cards(*)')
 		return data
 	});
-
-	const collection = reactive({
-		title: '',
-		cards: '',
-	});
-
-	const showMessage = ref(false)
 </script>
 
 <template>
