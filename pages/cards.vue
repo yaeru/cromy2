@@ -2,13 +2,15 @@
 	const supabase = useSupabaseClient();
 
 	const { data: cards } = await useAsyncData(async () => {
-		const { data } = await supabase.from('cards').select('*')
+		const { data } = await supabase.from('cards').select('*, collection(*)')
 		return data
 	});
 
 	const card = reactive({
 		title: '',
 		description: '',
+		collection_id: '',
+		collection: '',
 	});
 
 	const addCard = async () => {
@@ -19,6 +21,7 @@
 			showMessage.value = true;
 			card.title = '';
 			card.description = '';
+			card.collection_id = '';
 		}
 	};
 
@@ -56,4 +59,8 @@
 	<p v-else>
 		Loading...
 	</p>
+
+	<pre>
+		{{cards}}
+	</pre>
 </template>

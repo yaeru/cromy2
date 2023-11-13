@@ -23,6 +23,9 @@
 							<NuxtLink to="/">Home</NuxtLink>
 						</li>
 						<li>
+							<NuxtLink to="/collections">Collections</NuxtLink>
+						</li>
+						<li>
 							<NuxtLink to="/cards">Cards</NuxtLink>
 						</li>
 						<li v-if="user">
