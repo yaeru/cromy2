@@ -16,7 +16,7 @@
 <template>
 	<div class="uk-width-1-2@s">
 		<ul class="uk-nav-primary" uk-nav>
-			<li class="uk-active">
+			<li>
 				<NuxtLink to="/">Home</NuxtLink>
 			</li>
 			<li>

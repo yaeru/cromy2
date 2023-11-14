@@ -15,7 +15,7 @@
 				<h3 class="uk-card-title uk-margin-remove-bottom">
 					{{ card.title }}
 				</h3>
-				<p class="uk-text-meta uk-margin-remove-top">
+				<p class="uk-text-meta uk-margin-remove">
 					{{ card.collection.title }} - {{ card.created_at }}
 				</p>
 			</div>

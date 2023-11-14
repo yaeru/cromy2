@@ -18,8 +18,9 @@
 		<div class="uk-container uk-container-expand">
 			<div class="uk-navbar" uk-navbar>
 				<div class="uk-navbar-left">
+					<!-- <Breadcrumbs class="mt-4 ml-4" :breadcrumbs="breadcrumbs"/> -->
 					<nav aria-label="Breadcrumb">
-						<ul class="uk-breadcrumb">
+						<ul class="uk-breadcrumb uk-margin-remove">
 							<li><a href="#">Home</a></li>
 							<li><a href="#">Linked Category</a></li>
 							<li class="uk-disabled"><a>Disabled Category</a></li>

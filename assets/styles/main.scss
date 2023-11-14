@@ -1,0 +1,33 @@
+// your custom variables
+@import "./variables.scss";
+
+// UIkit default variables and mixins
+@import "uikit/src/scss/variables-theme.scss";
+@import "uikit/src/scss/mixins-theme.scss";
+@import "my-mixins-theme.scss";
+
+// import UIkit
+@import "uikit/src/scss/uikit-theme-custom.scss";
+
+
+/* Nav */
+
+/* Hover */
+.uk-nav-primary > a:hover {
+    color: $nav-primary-item-hover-color;
+    @if(mixin-exists(hook-nav-primary-item-hover)) {@include hook-nav-primary-item-hover();}
+}
+
+/* Active */
+.uk-nav-primary .router-link-active {
+    color: $nav-primary-item-active-color;
+    @if(mixin-exists(hook-nav-primary-item-active)) {@include hook-nav-primary-item-active();}
+}
+
+.uk-input,
+.uk-select,
+.uk-textarea,
+.uk-radio,
+.uk-checkbox {
+    border-radius: $base-border-radius-s;
+}

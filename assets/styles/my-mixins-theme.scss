@@ -1,0 +1,7 @@
+@mixin hook-card(){
+	border-radius: $base-border-radius-l;
+}
+@mixin hook-button(){
+	border-radius: $base-border-radius-s;
+	text-transform: uppercase;
+}
