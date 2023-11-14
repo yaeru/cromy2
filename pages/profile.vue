@@ -25,7 +25,7 @@
 	</pre> -->
 
 	<div>
-		<h3>My cards</h3>
+		<h3>My current Cards</h3>
 		<ul>
 			<li v-for="card in usercard" :key="card.id">
 				{{ card.title }} <span class="uk-badge" v-if="card.count > 1">{{ card.count }}</span>

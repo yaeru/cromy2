@@ -8,9 +8,10 @@
 </script>
 
 <template>
-	<h1>
-		Collections
-	</h1>
+	<h1 class="uk-margin-remove-bottom">Collections</h1>
+	<p class="uk-text-lead uk-margin-remove-top">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+	</p>
 
 	<h3>Listado de Collections</h3>
 	<ul class="uk-grid uk-grid-small uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-grid-match" uk-grid>
@@ -28,7 +29,7 @@
 		</li>
 	</ul>
 
-	<pre>
+	<!-- <pre>
 		{{ collections }}
-	</pre>
+	</pre> -->
 </template>

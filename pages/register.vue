@@ -20,9 +20,9 @@
 	};
 </script>
 <template>
-	<div>
-		<h1>Register</h1>
+	<div class="uk-flex uk-flex-center uk-flex-middle">
 		<form @submit.prevent="register" class="uk-card uk-card-body uk-card-default uk-width-large">
+			<h1>Register</h1>
 			<div class="uk-margin-bottom">
 				<input v-model="credentials.email" type="email" class="uk-input" placeholder="email" />
 			</div>

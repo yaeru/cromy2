@@ -29,9 +29,10 @@
 </script>
 
 <template>
-	<h1>
-		Cartas
-	</h1>
+	<h1 class="uk-margin-remove-bottom">Cards</h1>
+	<p class="uk-text-lead uk-margin-remove-top">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+	</p>
 
 	<div class=" uk-margin-large-bottom">
 		<h3>Envia tus Cartas</h3>

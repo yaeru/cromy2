@@ -15,23 +15,17 @@
 
 <template>
 	<nav class="uk-navbar-container">
-		<div class="uk-container">
+		<div class="uk-container uk-container-expand">
 			<div class="uk-navbar" uk-navbar>
 				<div class="uk-navbar-left">
-					<ul class="uk-navbar-nav">
-						<li>
-							<NuxtLink to="/">Home</NuxtLink>
-						</li>
-						<li>
-							<NuxtLink to="/collections">Collections</NuxtLink>
-						</li>
-						<li>
-							<NuxtLink to="/cards">Cards</NuxtLink>
-						</li>
-						<li v-if="user">
-							<NuxtLink to="/protected">Protected</NuxtLink>
-						</li>
-					</ul>
+					<nav aria-label="Breadcrumb">
+						<ul class="uk-breadcrumb">
+							<li><a href="#">Home</a></li>
+							<li><a href="#">Linked Category</a></li>
+							<li class="uk-disabled"><a>Disabled Category</a></li>
+							<li><span>Acá</span></li>
+						</ul>
+					</nav>
 				</div>
 				<div class="uk-navbar-right">
 					<ul class="uk-navbar-nav">

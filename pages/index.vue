@@ -31,23 +31,19 @@
 
 </script>
 <template>
-	<h1>Welcome to the homepage</h1>
-	<NuxtLink to="/cards" class="uk-button uk-button-primary uk-button-large">
-		Ir a Cartas
-	</NuxtLink>
+	<h1 class="uk-margin-remove-bottom">Ganar Cartas</h1>
+	<p class="uk-text-lead uk-margin-remove-top">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+	</p>
+	<button @click="openEnvelope" class="uk-button uk-button-secondary" v-if="user">Abrir</button>
+	<NuxtLink to="/login" class="uk-button uk-button-secondary" v-else>Registrate para ganar premios</NuxtLink>
+	<h4>Posibles Premios</h4>
+	<ul>
+		<li v-for="card in cards" :key="card.id">
+			{{card.title}}
+		</li>
+	</ul>
 
-	<div class="uk-section">
-		<h2>Ganar Cartas</h2>
-		<button @click="openEnvelope" class="uk-button uk-button-secondary" v-if="user">Abrir</button>
-		<NuxtLink to="/login" class="uk-button uk-button-secondary" v-else>Registrate para ganar premios</NuxtLink>
-		<h4>Posibles Premios</h4>
-		<ul>
-			<li v-for="card in cards" :key="card.id">
-				{{card.title}}
-			</li>
-		</ul>
-
-		<!-- Mostrar la carta seleccionada -->
-		<AppAlert state="success" v-if="selectedCardId">Carta seleccionada: {{ selectedCardTitle }}</AppAlert>
-	</div>
+	<!-- Mostrar la carta seleccionada -->
+	<AppAlert state="success" v-if="selectedCardId">Carta seleccionada: {{ selectedCardTitle }}</AppAlert>
 </template>
