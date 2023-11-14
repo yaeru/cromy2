@@ -35,15 +35,28 @@
 	<p class="uk-text-lead uk-margin-remove-top">
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
 	</p>
-	<button @click="openEnvelope" class="uk-button uk-button-secondary" v-if="user">Abrir</button>
-	<NuxtLink to="/login" class="uk-button uk-button-secondary" v-else>Registrate para ganar premios</NuxtLink>
-	<h4>Posibles Premios</h4>
-	<ul>
-		<li v-for="card in cards" :key="card.id">
-			{{card.title}}
-		</li>
-	</ul>
+	
+	<hr>
+	<div class="uk-grid uk-child-width-1-2@m uk-flex-middle">
+		<div class="uk-text-center">
+			<div class="uk-card uk-card-default uk-card-body">
+				<button @click="openEnvelope" class="uk-button uk-button-secondary uk-button-large" v-if="user">Abrir Sobre</button>
+				<NuxtLink to="/login" class="uk-button uk-button-secondary" v-else>Registrate para ganar premios</NuxtLink>
 
-	<!-- Mostrar la carta seleccionada -->
-	<AppAlert state="success" v-if="selectedCardId">Carta seleccionada: {{ selectedCardTitle }}</AppAlert>
+				<!-- Mostrar la carta seleccionada -->
+				<AppAlert state="success" v-if="selectedCardId">Carta seleccionada: {{ selectedCardTitle }}</AppAlert>
+			</div>
+		</div>
+		<div>
+			<h4>Posibles Premios</h4>
+			<ul>
+				<li v-for="card in cards" :key="card.id">
+					{{card.title}}
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+
+	
 </template>
