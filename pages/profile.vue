@@ -10,6 +10,9 @@
 		const { data } = await supabase.from('view_my_cards').select('*').eq('user_id', user.id)
 		return data
 	});
+	
+	const injectedUserTokens = inject<number>('userTokens');
+	const updateUserTokens = inject<() => Promise<void>>('updateTokens');
 </script>
 
 <template>
@@ -18,11 +21,8 @@
 		<li>ID: {{ user.id }}</li>
 		<li>Email: {{ user.email }}</li>
 		<li>phone: {{ user.phone }}</li>
+		<li>My Tokens: $  {{ injectedUserTokens }}</li>
 	</ul>
-
-	<!-- <pre>
-		{{ user }}
-	</pre> -->
 
 	<div>
 		<h3>My current Cards</h3>
@@ -32,8 +32,4 @@
 			</li>
 		</ul>
 	</div>
-
-	<!-- <pre>
-		{{ usercard }}
-	</pre> -->
 </template>

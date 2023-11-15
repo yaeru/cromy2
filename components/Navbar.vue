@@ -1,6 +1,5 @@
 <script setup lang="ts">
 	const user = useSupabaseUser();
-
 	const supaAuth = useSupabaseClient().auth;
 
 	const logout = async () => {
@@ -11,6 +10,10 @@
 			return navigateTo('/login');
 		}
 	};
+
+	const injectedUserTokens = inject<number>('userTokens');
+	const updateUserTokens = inject<() => Promise<void>>('updateTokens');
+
 </script>
 
 <template>
@@ -39,6 +42,9 @@
 							</li>
 						</template>
 						<template v-else>
+							<div class="uk-navbar-item">
+								<a class="uk-button uk-button-default"><span uk-icon="icon: database"></span> {{ injectedUserTokens }} / 100</a>
+							</div>
 							<li>
 								<NuxtLink to="/profile">My Account</NuxtLink>
 							</li>
@@ -51,4 +57,6 @@
 			</div>
 		</div>
 	</nav>
+
+	
 </template>
