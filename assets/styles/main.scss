@@ -13,15 +13,14 @@
 /* Nav */
 
 /* Hover */
-.uk-nav-primary > a:hover {
-    color: $nav-primary-item-hover-color;
-    @if(mixin-exists(hook-nav-primary-item-hover)) {@include hook-nav-primary-item-hover();}
+a:hover {
+	color: $nav-primary-item-hover-color;
+	@if(mixin-exists(hook-nav-primary-item-hover)) {@include hook-nav-primary-item-hover();}
 }
 
 /* Active */
-.uk-nav-primary .router-link-active {
-    color: $nav-primary-item-active-color;
-    @if(mixin-exists(hook-nav-primary-item-active)) {@include hook-nav-primary-item-active();}
+.router-link-active {
+	color: $nav-primary-item-active-color;
 }
 
 .uk-input,
@@ -29,5 +28,72 @@
 .uk-textarea,
 .uk-radio,
 .uk-checkbox {
-    border-radius: $base-border-radius-s;
+	border-radius: $base-border-radius-s;
+}
+
+.figurita {
+	max-width: 250px;
+	position: relative;
+	transition: all 0.2s ease-out;
+	&:hover {
+		transform: translateY(-8px) scale(1.02);
+		cursor: pointer;
+		&.figurita-repeted-one {
+			&:after {
+				transform: rotate(5deg);
+			}
+		}
+		&.figurita-repeted-more {
+			&:before {
+				transform: rotate(-6deg);
+			}
+		}
+	}
+	&.figurita-repeted-one {
+		&:after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			transform: rotate(3deg);
+			background-color: lighten($global-secondary-background, 40%);
+			border-radius: $base-border-radius-l;
+			z-index: -1;
+			transition: all 0.2s ease-out;
+		}
+	}
+	&.figurita-repeted-more {
+		z-index: 10;
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			transform: rotate(-4deg);
+			background-color: lighten($global-secondary-background, 60%);
+			border-radius: $base-border-radius-l;
+			z-index: -1;
+			transition: all 0.2s ease-out;
+		}
+	}
+	// Egypt
+	&.collection-1 .uk-card {
+		background-color: $egypt-background;
+		box-shadow: inset 0 0 0 4px darken($egypt-background, 10%);
+	}
+	// Greek
+	&.collection-2 .uk-card {
+		background-color: $greek-background;
+		box-shadow: inset 0 0 0 4px darken($greek-background, 10%);
+	}
+	// Norse
+	&.collection-3 .uk-card {
+		background-color: $norse-background;
+		@extend  .uk-card-secondary;
+		box-shadow: inset 0 0 0 4px darken($norse-background, 10%);
+	}
 }

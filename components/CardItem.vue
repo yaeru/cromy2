@@ -1,30 +1,37 @@
 <script setup>
 	const props = defineProps({
-		card: {
-			type: Object,
-			required: true,
-		},
+		title: String,
+		description: String,
+		number: String,
+		collection: Array,
+		collectionId: String,
+		collectionTitle: String,
 	});
-	const { card } = props;
 </script>
 
 <template>
-	<article class="uk-card uk-card-default uk-card-small">
-		<div class="uk-card-header uk-flex uk-flex-middle uk-flex-between">
-			<div>
-				<h3 class="uk-card-title uk-margin-remove-bottom">
-					{{ card.title }}
-				</h3>
-				<p class="uk-text-meta uk-margin-remove">
-					{{ card.collection.title }} - {{ card.created_at }}
+	<article :class="'figurita collection-' + collectionId">
+		<div class="uk-card uk-card-small">
+			<div class="uk-card-header uk-flex uk-flex-middle uk-flex-between">
+				<div>
+					<h3 class="uk-card-title uk-margin-remove-bottom">
+						{{ title }}
+					</h3>
+					<p class="uk-text-meta uk-margin-remove" v-if="collectionTitle">{{ collectionTitle }}</p>
+					<p class="uk-text-meta uk-margin-remove" v-else>collection title error</p>
+				</div>
+				<span class="uk-badge" v-if="number">
+					{{ number }}
+				</span>
+			</div>
+			<div class="uk-card-body uk-text-center">
+				<figure>
+					<img src="https://getuikit.com/docs/images/light.jpg" class="uk-border-rounded">
+				</figure>
+				<p class="uk-text-small" v-if="description">
+					{{ description }}
 				</p>
 			</div>
-			<span class="uk-sortable-handle uk-margin-small-right uk-text-center" uk-icon="icon: table"></span>
-		</div>
-		<div class="uk-card-body">
-			<p>
-				{{ card.description }}
-			</p>
 		</div>
 	</article>
 </template>

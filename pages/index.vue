@@ -5,7 +5,7 @@
 	const updateUserTokens = inject<() => Promise<void>>('updateTokens');
 
 	const { data: cards } = await useAsyncData(async () => {
-		const { data } = await supabase.from('cards').select('*')
+		const { data } = await supabase.from('cards').select('*, collection(id, title)')
 		return data
 	});
 	
@@ -13,6 +13,10 @@
 	const costPerCard = 20;
 	const selectedCardId = ref('');
 	const selectedCardTitle = ref('');
+	const selectedCardDescription = ref('');
+	const selectedCardCollecionId = ref('');
+	const selectedCardCollecionTitle = ref('');
+	const selectedCardNumber = ref('');
 	const showMesaggeNoHayTokens = ref(false)
 	const suficientesTokens = computed(() => injectedUserTokens.value >= costPerCard);
 
@@ -40,6 +44,10 @@
     	/* Actualizar ID_CARTA_SELECCIONADA */
 		selectedCardId.value = selectedCard.id;
 		selectedCardTitle.value = selectedCard.title;
+		selectedCardDescription.value = selectedCard.description;
+		selectedCardCollecionId.value = selectedCard.collection.id;
+		selectedCardCollecionTitle.value = selectedCard.collection.title;
+		selectedCardNumber.value = selectedCard.cardNumber;
 
 		const { data } = await supabase.from('userCard').insert([{ user_id: user.id, card_id: selectedCard.id }]).select();
 
@@ -50,47 +58,45 @@
 	};
 </script>
 <template>
-	<h1 class="uk-margin-remove-bottom">Ganar Cartas</h1>
-	<p class="uk-text-lead uk-margin-remove-top">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
-	</p>
-	
-	<hr>
-	<div class="uk-grid uk-flex-middle" uk-grid>
-		<div class="uk-width-2-3@m uk-text-center">	
-			<template v-if="user">
-				<p class="uk-h2">Tienes {{ injectedUserTokens }}/100 tokens en tu billetera.</p>
-				
-				<div class="uk-grid uk-child-width-1-3@m" uk-grid>	
-					<div>
-						<article class="sobre uk-card uk-card-secondary uk-card-body uk-card-small">
-							<h3 class="uk-margin-remove uk-h2">Sobre Title</h3>
-							<p class="uk-margin-remove uk-h5">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-							<p>Sobre Cost: {{ costPerCard }}</p>
-							<button @click="openEnvelope" :disabled="!suficientesTokens" class="uk-button uk-button-secondary uk-width-expand">Abrir Sobre</button>
-						</article>
-					</div>
-				</div>
 
+	<SectionHeader title="Ganar Cartas" lead="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod." />
 
-				<!-- Mostrar la carta seleccionada -->
-				<AppAlert state="success" v-if="selectedCardId">Carta seleccionada: {{ selectedCardTitle }}</AppAlert>
-				<AppAlert state="danger" v-if="!suficientesTokens">No tienes suficientes tokens para seleccionar una carta.</AppAlert>
-			</template>
-			<template v-else>
-				<h3>
-					Registrate para abrir sobres y ganar cartas
-				</h3>
-				<NuxtLink to="/login" class="uk-button uk-button-secondary">Registrate acá</NuxtLink>
-			</template>
-		</div>
-		<div class="uk-width-1-3@m">
-			<h4>Posibles Premios</h4>
-			<ul>
-				<li v-for="card in cards" :key="card.id">
-					{{card.title}}
-				</li>
-			</ul>
+	<section class="uk-section uk-section-small uk-text-center">
+		<template v-if="user">
+			<p class="uk-h2">Tienes {{ injectedUserTokens }}/100 tokens en tu billetera.</p>
+
+			
+					<article class="sobre uk-card uk-card-secondary uk-card-body uk-card-small uk-width-medium uk-align-center">
+						<h3 class="uk-margin-remove uk-h2">¡Abri un Sobre!</h3>
+						<p class="uk-margin-remove uk-h5">Gana una de las 30 cartas disponibles.</p>
+						<p>Valor {{ costPerCard }} Tokens</p>
+						<button @click="openEnvelope" :disabled="!suficientesTokens" class="uk-button uk-button-secondary uk-width-expand" uk-toggle="#modal-new-card">Abrir Sobre</button>
+					</article>
+			
+			<AppAlert state="danger" v-if="!suficientesTokens">No tienes suficientes tokens para seleccionar una carta.</AppAlert>
+		</template>
+		
+		<template v-else>
+			<h3>
+				Registrate para abrir sobres y ganar cartas
+			</h3>
+			<NuxtLink to="/login" class="uk-button uk-button-secondary">Ingresá</NuxtLink>
+			<NuxtLink to="/register" class="uk-button uk-button-secondary uk-margin-small-left">Registrate</NuxtLink>
+		</template>
+	</section>
+
+	<!-- This is the modal -->
+	<div id="modal-new-card" class="uk-flex-top" uk-modal>
+		<div class="uk-modal-dialog uk-margin-auto-vertical">
+			<div class="uk-modal-header">
+				<h2 class="uk-modal-title">Nueva Carta</h2>
+			</div>
+			<div class="uk-modal-body">
+				<CardItem class="uk-align-center" :title="selectedCardTitle" :description="selectedCardDescription" :collectionId="selectedCardCollecionId" :collectionTitle="selectedCardCollecionTitle" :number="selectedCardNumber" />
+			</div>
+			<div class="uk-modal-footer uk-text-right">
+				<button class="uk-button uk-button-secondary uk-modal-close" type="button">Cerrar</button>
+			</div>
 		</div>
 	</div>
 </template>

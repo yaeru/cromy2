@@ -7,7 +7,7 @@
 	});
 
 	const { data: cards } = await useAsyncData(async () => {
-		const { data } = await supabase.from('cards').select('*, collection(*)')
+		const { data } = await supabase.from('cards').select('*, collection(*)').order('id', { ascending: true })
 		return data
 	});
 
@@ -34,14 +34,9 @@
 </script>
 
 <template>
-	<h1 class="uk-margin-remove-bottom">Cards</h1>
-	<p class="uk-text-lead uk-margin-remove-top">
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
-	</p>
-
-	<hr>
+	<SectionHeader title="Cards" lead="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod." />
 	
-	<div class=" uk-margin-large-bottom">
+	<section class="uk-section uk-section-small">
 		<h2>Envia tus Cartas</h2>
 		<form @submit.prevent="addCard"  class="uk-grid uk-grid-small uk-child-width-expand" uk-grid>
 			<div class="uk-margin">
@@ -65,19 +60,17 @@
 		</form>
 
 		<AppAlert state="success" v-if="showMessage">¡Funcionó!</AppAlert>
-	</div>
+	</section>
 
-	<h2>Listado de Cartas</h2>
-	<ul v-if="cards.length" class="uk-grid uk-grid-small uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-child-width-1-4@l uk-grid-match" uk-sortable="handle: .uk-sortable-handle" uk-grid>
-		<li v-for="card in cards">
-			<CardItem :card="card" :key="card.id" />
-		</li>
-	</ul>
-	<p v-else>
-		Loading...
-	</p>
-
-	<pre>
-		{{cards}}
-	</pre>
+	<section class="uk-section uk-section-small">
+		<h2>Listado de Cartas</h2>
+		<ul v-if="cards.length" class="uk-grid uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-child-width-1-5@l" uk-grid uk-height-match="target: .uk-card">
+			<li v-for="card in cards">
+				<CardItem :key="card.id" :title="card.title" :description="card.description" :collectionId="card.collection.id" :collectionTitle="card.collection.title" :number="card.cardNumber" />
+			</li>
+		</ul>
+		<p v-else>
+			Loading...
+		</p>
+	</section>
 </template>
