@@ -9,7 +9,7 @@
 		return data
 	});
 	
-	/* Open envelope */
+	/* Open Pack */
 	const costPerCard = 20;
 	const selectedCardId = ref('');
 	const selectedCardTitle = ref('');
@@ -20,7 +20,7 @@
 	const showMesaggeNoHayTokens = ref(false)
 	const suficientesTokens = computed(() => injectedUserTokens.value >= costPerCard);
 
-	const openEnvelope = async () => {		
+	const openPack = async () => {		
 		// Verificar si el usuario tiene suficientes tokens
 		if (injectedUserTokens.value < costPerCard) {
 			showMesaggeNoHayTokens.value = true;
@@ -70,7 +70,7 @@
 						<h3 class="uk-margin-remove uk-h2">¡Abri un Sobre!</h3>
 						<p class="uk-margin-remove uk-h5">Gana una de las 30 cartas disponibles.</p>
 						<p>Valor {{ costPerCard }} Tokens</p>
-						<button @click="openEnvelope" :disabled="!suficientesTokens" class="uk-button uk-button-secondary uk-width-expand" uk-toggle="#modal-new-card">Abrir Sobre</button>
+						<button @click="openPack" :disabled="!suficientesTokens" class="uk-button uk-button-secondary uk-width-expand" uk-toggle="#modal-new-card">Abrir Sobre</button>
 					</article>
 			
 			<AppAlert state="danger" v-if="!suficientesTokens">No tienes suficientes tokens para seleccionar una carta.</AppAlert>

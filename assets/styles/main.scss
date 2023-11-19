@@ -30,6 +30,22 @@ a:hover {
 .uk-checkbox {
 	border-radius: $base-border-radius-s;
 }
+.text-balance {
+	text-wrap: balance;
+}
+
+.pack {
+	max-width: 150px;
+	img {
+		@extend .uk-border-rounded;
+	}
+}
+#collections-store {
+	margin-top: 100px;
+	.pack {
+		margin-top: -100px;
+	}
+}
 
 .figurita {
 	max-width: 250px;

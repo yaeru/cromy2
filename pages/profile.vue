@@ -5,9 +5,9 @@
 	const user = useSupabaseUser();
 	const supabase = useSupabaseClient();
 	
-	const { data: usercard } = await useAsyncData(async () => {
+	const { data: usercollection } = await useAsyncData(async () => {
 		const { data: { user } } = await supabase.auth.getUser()
-		const { data } = await supabase.from('view_my_cards').select('*').eq('user_id', user.id)
+		const { data } = await supabase.from('view_my_collections').select('*').eq('user_id', user.id)
 		return data
 	});
 	
@@ -27,11 +27,23 @@
 	</section>
 
 	<section class="uk-section uk-section-small">
-		<h3>My current Cards</h3>
-		<div class="uk-grid uk-grid-match uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-child-width-1-5@l" uk-grid uk-height-match="target: .uk-card">
-			<div v-for="card in usercard" :key="card.id">
-				<CardItem :key="card.id" :title="card.title" :description="card.description" :collectionId="card.collection_id" :collectionTitle="card.collection_title" :number="card.cardNumber" :class="{ 'figurita-repeted-one': card.count > 1, 'figurita-repeted-more': card.count > 2 }" />
+		<h3>My current Collections</h3>
+		<div class="uk-grid uk-grid-match uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-child-width-1-5@l" uk-grid>
+			<div v-for="collection in usercollection" :key="collection.id">
+				<div class="uk-card uk-card-default uk-card-small uk-card-body">
+					<p class="uk-h3">{{ collection.title }}</p>
+					<p>{{ collection.description }}</p>
+					<p>{{collection.collection_id}}</p>
+					<NuxtLink :to="'/collections/' + collection.collection_id" class="uk-button uk-button-primary uk-button-small uk-width-expand">
+						Ver Collection
+					</NuxtLink>
 				</div>
 			</div>
-		</section>
-	</template>
+		</div>
+
+		<pre>
+			{{usercollection}}
+		</pre>
+	</section>
+
+</template>
