@@ -13,6 +13,11 @@
 		return data
 	});
 
+	/* Check if Collection is already bought */
+	function isUserCollection(collectionId: number) {
+		return userCollections.value.some((uc: any) => uc.collection_id === collectionId);
+	}
+
 	/* Buy Collection */
 	const costPerCollection = 50;
 	const selectedCollectionId = ref<string | null>(null);
@@ -40,10 +45,10 @@
 		/* Actualizar la fila existente en userTokens con la nueva cantidad de tokens */
 		await supabase.from('userTokens').update([{ tokens: newTokensValue }]).eq('user_id', user.id);
 
-    	// Actualizar el ID de la colección seleccionada
+		/* Actualizar el ID de la colección seleccionada */
 		selectedCollectionId.value = collectionId;
 
-		// Guardar coleccion en userCollection
+		/* Guardar coleccion en userCollection */
 		const { data } = await supabase.from('userCollection').insert([{ user_id: user.id, collection_id: collectionId }]).select();
 
 		/* Actualizar la cantidad de tokens en el estado local */
@@ -54,15 +59,15 @@
 </script>
 
 <template>
-	<SectionHeader title="Collections" lead="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod." />
+	<SectionHeader title="Buy Collections" lead="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod." />
 
 	<section id="collections-store" class="uk-section uk-section-small uk-padding-remove-top">
 		<div class="uk-grid uk-grid-small uk-grid-match uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid>
-			<div v-for="collection in collections">
-				<article class="uk-card uk-card-secondary uk-card-body uk-card-small uk-text-center">
+			<div v-for="collection in collections" :class="{ 'pepe': isUserCollection(collection.id) }">
+				<article class="uk-card uk-card-default uk-card-body uk-card-small uk-text-center">
 					<figure class="pack uk-align-center">
 						<img :src="collection.avatar" v-if="collection.avatar" :alt="collection.title" width="150">
-						<img src="~/public/placeholder.png" v-else :alt="collection.title" width="250">
+						<img src="~/assets/placeholder.png" v-else :alt="collection.title" width="250">
 					</figure>
 
 					<h3 class="uk-h2 uk-margin-remove">
@@ -71,12 +76,19 @@
 					<p class="uk-margin-remove text-balance">
 						{{collection.description}}
 					</p>
-					<ul class="uk-column-1-2@m uk-margin-small-top uk-text-left">
+					<ul class="uk-column-1-3@m uk-margin-medium-top uk-text-left">
 						<li v-for="card in collection.cards">
 							{{card.cardNumber}} - {{card.title}}
 						</li>
 					</ul>
-					<button @click="() => buyCollection(collection.id)" :disabled="!suficientesTokens" class="uk-button uk-button-primary uk-width-expand" uk-toggle="#modal-buy-collection">Comprar por {{costPerCollection}} tokens</button>
+					<div uk-margin>
+						<NuxtLink :to="'/collections/' + collection.id" class="uk-button uk-button-primary uk-width-expand">
+							Ver Collection
+						</NuxtLink>
+
+						<button @click="() => buyCollection(collection.id)" v-if="!isUserCollection(collection.id)" class="uk-button uk-button-primary uk-width-expand" uk-toggle="#modal-buy-collection">Comprar por {{costPerCollection}} tokens</button>
+						<button v-else class="uk-button uk-button-primary uk-width-expand" disabled>Ya lo compraste</button>
+					</div>
 				</article>
 			</div>
 		</div>

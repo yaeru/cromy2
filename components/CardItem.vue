@@ -24,7 +24,7 @@
 					{{ number }}
 				</span>
 			</div>
-			<div class="uk-card-body uk-text-center">
+			<div class="uk-card-body uk-padding-remove-top uk-text-center">
 				<figure>
 					<img src="https://getuikit.com/docs/images/light.jpg" class="uk-border-rounded">
 				</figure>

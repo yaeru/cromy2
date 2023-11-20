@@ -14,4 +14,9 @@
 	<main class="uk-container uk-container-large">
 		<slot />
 	</main>
+	<footer class="uk-padding uk-text-center">
+		<div class="uk-container uk-container-large">
+			<p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+		</div>
+	</footer>
 </template>

@@ -33,7 +33,6 @@
 				<div class="uk-card uk-card-default uk-card-small uk-card-body">
 					<p class="uk-h3">{{ collection.title }}</p>
 					<p>{{ collection.description }}</p>
-					<p>{{collection.collection_id}}</p>
 					<NuxtLink :to="'/collections/' + collection.collection_id" class="uk-button uk-button-primary uk-button-small uk-width-expand">
 						Ver Collection
 					</NuxtLink>

@@ -59,7 +59,7 @@
 </script>
 <template>
 
-	<SectionHeader title="Ganar Cartas" lead="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod." />
+	<SectionHeader title="Abrir Sobres" lead="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod." />
 
 	<section class="uk-section uk-section-small uk-text-center">
 		<template v-if="user">

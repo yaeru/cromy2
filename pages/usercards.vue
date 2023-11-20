@@ -16,8 +16,8 @@
 </script>
 
 <template>
+	<SectionHeader title="My current Cards" />
 	<section class="uk-section uk-section-small">
-		<h3>My current Cards</h3>
 		<div class="uk-grid uk-grid-match uk-child-width-1-2@s uk-grid uk-child-width-1-3@m uk-child-width-1-5@l" uk-grid uk-height-match="target: .uk-card">
 			<div v-for="card in usercard" :key="card.id">
 				<CardItem :key="card.id" :title="card.title" :description="card.description" :collectionId="card.collection_id" :collectionTitle="card.collection_title" :number="card.cardNumber" :class="{ 'figurita-repeted-one': card.count > 1, 'figurita-repeted-more': card.count > 2 }" />
