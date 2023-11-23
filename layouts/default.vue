@@ -1,11 +1,13 @@
 <script setup lang="ts">
+	const user = useSupabaseUser();
+	const supabase = useSupabaseClient();
 	import { useTokenService } from '~/services/tokenService';
 
-	const { userTokens, updateTokens } = useTokenService();
-
-    // Proporciona los datos y métodos del servicio para que estén disponibles globalmente
-	provide('userTokens', userTokens);
-	provide('updateTokens', updateTokens);
+	if (user.value) {
+		const { userTokens, updateTokens } = useTokenService();
+		provide('userTokens', userTokens);
+		provide('updateTokens', updateTokens);
+	}
 </script>
 
 

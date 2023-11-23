@@ -1,5 +1,6 @@
 $global-primary-background: red;
 $global-link-color: $global-primary-background;
+$global-background: #fff;
 
 $egypt-background: #DED18D;
 $greek-background: #9bd5e0;
@@ -9,7 +10,9 @@ $base-border-radius-s: 4px;
 $base-border-radius-m: 5px;
 $base-border-radius-l: 10px;
 
-$global-background: #fff;
+
+$global-font-family: 'Poppins', sans-serif;
+$base-heading-font-weight: 600;
 
 $nav-primary-item-hover-color: $global-primary-background;
 $nav-primary-item-active-color: $nav-primary-item-hover-color;

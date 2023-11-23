@@ -1,12 +1,8 @@
 // tokenService.ts
-
-
 export const useTokenService = () => {
-	
 	const supabase = useSupabaseClient();
-
+	
 	const userTokens = ref(0);
-
 	const updateTokens = async () => {
 		const { data: { user } } = await supabase.auth.getUser();
 		const response = await supabase.from('userTokens').select('tokens').eq('user_id', user.id);
