@@ -62,36 +62,39 @@
 	<SectionHeader title="Buy Collections" lead="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod." />
 
 	<section id="collections-store" class="uk-section uk-section-small uk-padding-remove-top">
-		<div class="uk-grid uk-grid-small uk-grid-match uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid>
-			<div v-for="collection in collections" :class="{ 'pepe': isUserCollection(collection.id) }">
-				<article class="uk-card uk-card-default uk-card-body uk-card-small uk-text-center">
-					<figure class="pack uk-align-center">
-						<img :src="collection.avatar" v-if="collection.avatar" :alt="collection.title" width="150">
-						<img src="~/assets/placeholder.png" v-else :alt="collection.title" width="250">
-					</figure>
+		<Suspense>
+			<div class="uk-grid uk-grid-small uk-grid-match uk-child-width-1-2@m uk-child-width-1-3@l" uk-grid>
+				<div v-for="collection in collections" :class="{ 'pepe': isUserCollection(collection.id) }">
+					<article class="uk-card uk-card-default uk-card-body uk-card-small uk-text-center">
+						<figure class="pack uk-align-center">
+							<img :src="collection.avatar" v-if="collection.avatar" :alt="collection.title" width="150" height="214" loading="lazy">
+							<img src="~/assets/placeholder.png" v-else :alt="collection.title"  width="150" height="214" loading="lazy">
+						</figure>
 
-					<h3 class="uk-h2 uk-margin-remove">
-						{{collection.title}}
-					</h3>
-					<p class="uk-margin-remove text-balance">
-						{{collection.description}}
-					</p>
-					<ul class="uk-column-1-3@m uk-margin-medium-top uk-text-left">
-						<li v-for="card in collection.cards">
-							{{card.cardNumber}} - {{card.title}}
-						</li>
-					</ul>
-					<div uk-margin>
-						<NuxtLink :to="'/collections/' + collection.id" class="uk-button uk-button-primary uk-width-expand">
-							Ver Collection
-						</NuxtLink>
-
-						<button @click="() => buyCollection(collection.id)" v-if="!isUserCollection(collection.id)" class="uk-button uk-button-primary uk-width-expand" uk-toggle="#modal-buy-collection">Comprar por {{costPerCollection}} tokens</button>
-						<button v-else class="uk-button uk-button-primary uk-width-expand" disabled>Ya lo compraste</button>
-					</div>
-				</article>
+						<h3 class="uk-h2 uk-margin-remove">
+							{{collection.title}}
+						</h3>
+						<p class="uk-margin-small-top text-balance">
+							{{collection.description}}
+						</p>
+						<!-- <ul class="uk-column-1-3@m uk-margin-medium-top uk-text-left">
+							<li v-for="card in collection.cards">
+								{{card.cardNumber}} - {{card.title}}
+							</li>
+						</ul> -->
+						<div uk-margin>
+							<NuxtLink :to="'/collections/' + collection.id" class="uk-button uk-button-primary uk-width-expand">
+								Ver Collection
+							</NuxtLink>
+							<template v-if="user">
+								<button @click="() => buyCollection(collection.id)" v-if="!isUserCollection(collection.id)" class="uk-button uk-button-primary uk-width-expand" uk-toggle="#modal-buy-collection">Comprar por {{costPerCollection}} tokens</button>
+								<button v-else class="uk-button uk-button-primary uk-width-expand" disabled>Ya lo compraste</button>
+							</template>
+						</div>
+					</article>
+				</div>
 			</div>
-		</div>
+		</Suspense>
 	</section>
 
 	<!-- This is the modal -->

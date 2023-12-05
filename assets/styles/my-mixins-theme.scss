@@ -5,3 +5,7 @@
 	border-radius: $base-border-radius-s;
 	text-transform: uppercase;
 }
+
+@mixin hook-navbar-container() {
+	background: $global-primary-background;
+}

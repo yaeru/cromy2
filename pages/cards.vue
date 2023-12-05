@@ -36,30 +36,32 @@
 <template>
 	<SectionHeader title="Cards" lead="Lorem ipsum dolor sit amet consectetur adipisicing elit, sed do eiusmod." />
 	
-	<section class="uk-section uk-section-small">
-		<h2>Envia tus Cartas</h2>
-		<form @submit.prevent="addCard"  class="uk-grid uk-grid-small uk-child-width-expand" uk-grid>
-			<div class="uk-margin">
-				<label class="uk-form-label uk-hidden" for="title">Nombre</label>
-				<input type="text" name="title" id="title" placeholder="Título de la Carta" v-model="card.title" class="uk-input" required />
-			</div>
-			<div>
-				<input type="text" name="description" placeholder="Description (opcional)" v-model="card.description" class="uk-input" />
-			</div>
-			<div>
-				<select class="uk-select" name="collection" v-model="card.collection_id" required>
-					<option value="" disabled selected>Selecciona una Coleción</option>
-					<option v-for="collection in collections" :key="collection.id" :value="collection.id">
-						{{collection.title}}
-					</option>
-				</select>
-			</div>
-			<div>
-				<button type="submit" class="uk-button uk-button-primary">Enviar</button>
-			</div>
-		</form>
+	<section class="uk-section uk-padding-remove">
+		<div class="uk-card uk-card-default uk-card-body uk-card-small">
+			<h2>Envia tus Cartas</h2>
+			<form @submit.prevent="addCard"  class="uk-grid uk-grid-small uk-child-width-expand" uk-grid>
+				<div class="uk-margin">
+					<label class="uk-form-label uk-hidden" for="title">Nombre</label>
+					<input type="text" name="title" id="title" placeholder="Título de la Carta" v-model="card.title" class="uk-input" required />
+				</div>
+				<div>
+					<input type="text" name="description" placeholder="Description (opcional)" v-model="card.description" class="uk-input" />
+				</div>
+				<div>
+					<select class="uk-select" name="collection" v-model="card.collection_id" required>
+						<option value="" disabled selected>Selecciona una Coleción</option>
+						<option v-for="collection in collections" :key="collection.id" :value="collection.id">
+							{{collection.title}}
+						</option>
+					</select>
+				</div>
+				<div>
+					<button type="submit" class="uk-button uk-button-primary">Enviar</button>
+				</div>
+			</form>
 
-		<AppAlert state="success" v-if="showMessage">¡Funcionó!</AppAlert>
+			<AppAlert state="success" v-if="showMessage">¡Funcionó!</AppAlert>
+		</div>
 	</section>
 
 	<section class="uk-section uk-section-small">
