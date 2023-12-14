@@ -11,7 +11,7 @@
 
 <template>
 	<article :class="'figurita collection-' + collectionId">
-		<div class="uk-card uk-card-small">
+		<div class="uk-card uk-card-small uk-box-shadow-large">
 			<div class="uk-card-header uk-flex uk-flex-middle uk-flex-between">
 				<div>
 					<h3 class="uk-card-title uk-margin-remove-bottom">

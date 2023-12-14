@@ -16,7 +16,8 @@
 	</main>
 	<footer class="uk-padding uk-text-center">
 		<div class="uk-container uk-container-large">
-			<p class="uk-margin-remove">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+			<h3 class="uk-margin-remove-top uk-margin-small-bottom">Cromy Test</h3>
+			<p class="uk-margin-remove uk-text-small">©2023 - Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 		</div>
 	</footer>
 </template>

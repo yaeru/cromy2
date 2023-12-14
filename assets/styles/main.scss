@@ -13,12 +13,20 @@
 
 
 /* Nav */
+.uk-navbar-nav > li a.uk-active {
+	color: $inverse-navbar-nav-item-active-color;
+}
+.router-link-active {
+	@extend .uk-active;
+}
 
 /* Hover */
 a:hover {
 	color: $nav-primary-item-hover-color;
 	@if(mixin-exists(hook-nav-primary-item-hover)) {@include hook-nav-primary-item-hover();}
 }
+
+
 
 /* Active */
 .router-link-active {
@@ -55,6 +63,7 @@ a:hover {
 }
 
 .figurita {
+	user-select: none;
 	position: relative;
 	transition: all 0.2s ease-out;
 	.uk-card {
@@ -62,7 +71,7 @@ a:hover {
 	}
 	&:hover {
 		transform: translateY(-8px) scale(1.02);
-		cursor: pointer;
+		//cursor: pointer;
 		&.figurita-repeted-one {
 			&:after {
 				transform: rotate(5deg);

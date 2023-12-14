@@ -17,11 +17,11 @@
 </script>
 
 <template>
-	<nav class="uk-navbar-container">
+	<nav class="uk-navbar-container uk-light">
 		<div class="uk-container uk-container-large">
 			<div class="uk-navbar" uk-navbar>
 				<div class="uk-navbar-left">
-					<NuxtLink to="" class="uk-navbar-item uk-logo">Logo</NuxtLink>
+					<NuxtLink to="/" class="uk-navbar-item uk-logo">Cromy Test</NuxtLink>
 					<ul class="uk-navbar-nav uk-visible@m">
 						<li>
 							<NuxtLink to="/">Home</NuxtLink>
