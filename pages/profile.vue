@@ -2,6 +2,8 @@
 	definePageMeta({
 		middleware: 'authenticated',
 	});
+	import { useTokenService } from '~/services/tokenService';
+	const { userTokens } = useTokenService();
 	const user = useSupabaseUser();
 	const supabase = useSupabaseClient();
 	
@@ -10,9 +12,6 @@
 		const { data } = await supabase.from('view_my_collections').select('*').eq('user_id', user.id)
 		return data
 	});
-	
-	const injectedUserTokens = inject<number>('userTokens');
-	const updateUserTokens = inject<() => Promise<void>>('updateTokens');
 </script>
 
 <template>
@@ -22,7 +21,7 @@
 			<li>ID: {{ user.id }}</li>
 			<li>Email: {{ user.email }}</li>
 			<li>phone: {{ user.phone }}</li>
-			<li>My Tokens: $  {{ injectedUserTokens }}</li>
+			<li>My Tokens: $  {{ userTokens }}</li>
 		</ul>
 	</section>
 
@@ -39,10 +38,10 @@
 				</div>
 			</div>
 		</div>
-
+<!-- 
 		<pre>
 			{{usercollection}}
-		</pre>
+		</pre> -->
 	</section>
 
 </template>

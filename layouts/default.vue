@@ -2,12 +2,10 @@
 	const user = useSupabaseUser();
 	const supabase = useSupabaseClient();
 	import { useTokenService } from '~/services/tokenService';
-
-	if (user.value) {
-		const { userTokens, updateTokens } = useTokenService();
-		provide('userTokens', userTokens);
-		provide('updateTokens', updateTokens);
-	}
+	
+	const { userTokens, updateTokens } = useTokenService();
+	provide('userTokens', userTokens);
+	provide('updateTokens', updateTokens);
 </script>
 
 

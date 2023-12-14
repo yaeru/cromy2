@@ -2,6 +2,10 @@
 	const user = useSupabaseUser();
 	const supaAuth = useSupabaseClient().auth;
 
+	import { useTokenService } from '~/services/tokenService';
+	const { userTokens } = useTokenService();
+	
+
 	const logout = async () => {
 		const { error } = await supaAuth.signOut();
 		if (error) {
@@ -10,10 +14,6 @@
 			return navigateTo('/login');
 		}
 	};
-
-	const injectedUserTokens = inject<number>('userTokens');
-	const updateUserTokens = inject<() => Promise<void>>('updateTokens');
-
 </script>
 
 <template>
@@ -49,7 +49,7 @@
 						</template>
 						<template v-else>
 							<div class="uk-navbar-item">
-								<a href="#modal-token" uk-toggle class="uk-button uk-button-default"><span uk-icon="icon: database"></span> {{ injectedUserTokens }} / 100</a>
+								<a href="#modal-token" uk-toggle class="uk-button uk-button-default"><span uk-icon="icon: database"></span> {{ userTokens }} / 100</a>
 							</div>
 							<li>
 								<a href="#" uk-icon="icon: chevron-down">
@@ -69,7 +69,6 @@
 									</ul>
 								</div>
 							</li>
-							
 						</template>
 					</ul>
 				</div>
@@ -85,6 +84,4 @@
 			<p>Tenes {{ injectedUserTokens }} / 100</p>
 		</div>
 	</div>
-
-	
 </template>

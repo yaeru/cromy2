@@ -1,65 +1,71 @@
 <script setup lang="ts">
 	const user = useSupabaseUser();
 	const supabase = useSupabaseClient();
-	
+
 	const { data: cards } = await useAsyncData(async () => {
 		const { data } = await supabase.from('cards').select('*, collection(id, title)')
 		return data
 	});
-	
-	
-	if (user.value) {
-		const injectedUserTokens = inject<number>('userTokens');
-		const updateUserTokens = inject<() => Promise<void>>('updateTokens');
 
-		/* Open Pack */
-		const costPerCard = 20;
-		const selectedCardId = ref('');
-		const selectedCardTitle = ref('');
-		const selectedCardDescription = ref('');
-		const selectedCardCollecionId = ref('');
-		const selectedCardCollecionTitle = ref('');
-		const selectedCardNumber = ref('');
-		const showMesaggeNoHayTokens = ref(false)
-		const suficientesTokens = computed(() => injectedUserTokens.value >= costPerCard);
+	const injectedUserTokens = inject<number>('userTokens');
+	const updateUserTokens = inject<() => Promise<void>>('updateTokens');
 
-		const openPack = async () => {		
-		// Verificar si el usuario tiene suficientes tokens
-			if (injectedUserTokens.value < costPerCard) {
-				showMesaggeNoHayTokens.value = true;
-				return;
-			}
-			const { data: { user } } = await supabase.auth.getUser();
+	/* Open Pack */
+	const costPerCard = 20;
+	const selectedCardId = ref('');
+	const selectedCardTitle = ref('');
+	const selectedCardDescription = ref('');
+	const selectedCardCollecionId = ref('');
+	const selectedCardCollecionTitle = ref('');
+	const selectedCardNumber = ref('');
+	const showMesaggeNoHayTokens = ref(false)
+	
+	const suficientesTokens = computed(() => {
+		if (user.value) {
+			return injectedUserTokens.value >= costPerCard;
+		} else {
+			return false;
+		}
+	});
+
+	const openPack = async () => {
+		/* Verificar si el usuario tiene suficientes tokens */
+		if (injectedUserTokens.value < costPerCard) {
+			showMesaggeNoHayTokens.value = true;
+			return;
+		}
+		const { data: { user } } = await supabase.auth.getUser();
 
 		/* Obtener la fila existente de userTokens */
-			const { data: existingUserTokens } = await supabase.from('userTokens').select('tokens').eq('user_id', user.id);
+		const { data: existingUserTokens } = await supabase.from('userTokens').select('tokens').eq('user_id', user.id);
 
 		/* Calcular la nueva cantidad de tokens */
-			const newTokensValue = existingUserTokens.length > 0 ? existingUserTokens[0].tokens - costPerCard : 0;
+		const newTokensValue = existingUserTokens.length > 0 ? existingUserTokens[0].tokens - costPerCard : 0;
 
 		/* Actualizar la fila existente en userTokens con la nueva cantidad de tokens */
-			await supabase.from('userTokens').update([{ tokens: newTokensValue }]).eq('user_id', user.id);
+		await supabase.from('userTokens').update([{ tokens: newTokensValue }]).eq('user_id', user.id);
 
     	/* Seleccionar una carta al azar */
-			const randomIndex = Math.floor(Math.random() * cards.value.length);
-			const selectedCard = cards.value[randomIndex];
+		const randomIndex = Math.floor(Math.random() * cards.value.length);
+		const selectedCard = cards.value[randomIndex];
 
     	/* Actualizar ID_CARTA_SELECCIONADA */
-			selectedCardId.value = selectedCard.id;
-			selectedCardTitle.value = selectedCard.title;
-			selectedCardDescription.value = selectedCard.description;
-			selectedCardCollecionId.value = selectedCard.collection.id;
-			selectedCardCollecionTitle.value = selectedCard.collection.title;
-			selectedCardNumber.value = selectedCard.cardNumber;
+		selectedCardId.value = selectedCard.id;
+		selectedCardTitle.value = selectedCard.title;
+		selectedCardDescription.value = selectedCard.description;
+		selectedCardCollecionId.value = selectedCard.collection.id;
+		selectedCardCollecionTitle.value = selectedCard.collection.title;
+		selectedCardNumber.value = selectedCard.cardNumber;
 
-			const { data } = await supabase.from('userCard').insert([{ user_id: user.id, card_id: selectedCard.id }]).select();
+		const { data } = await supabase.from('userCard').insert([{ user_id: user.id, card_id: selectedCard.id }]).select();
 
 		/* Actualizar la cantidad de tokens en el estado local */
-			await updateUserTokens();
+		await updateUserTokens();
 
-			return data;
-		};
-	}
+		return data;
+	};
+	//console.log(user.value.email);
+	console.log(costPerCard);
 </script>
 <template>
 

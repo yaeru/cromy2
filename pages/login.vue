@@ -3,11 +3,13 @@
 		middleware: 'unauthenticated',
 	});
 
+	
 	const supaAuth = useSupabaseClient().auth;
-
+	import { useTokenService } from '~/services/tokenService';
+	const { userTokens, updateTokens } = useTokenService();
 	const credentials = reactive({
-		email: '',
-		password: '',
+		email: 'demo@demo.com',
+		password: 'demodemo',
 	});
 
 	const login = async () => {
@@ -15,7 +17,8 @@
 		if (error) {
 			alert(error.message);
 		} else {
-			return navigateTo('/');
+			updateTokens();
+			return navigateTo('/profile');
 		}
 	};
 </script>
